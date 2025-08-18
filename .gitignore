@@ -12,7 +12,6 @@ dist
 dist-ssr
 *.local
 .tanstack
-.flowbite-react
 
 # Editor directories and files
 .vscode/*

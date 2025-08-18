@@ -15,7 +15,7 @@ export default interface Restaurant {
    */
   name: string;
 
-  logoURL: string;
+  bannerURL: string;
 
   address: string;
 
@@ -32,14 +32,14 @@ export default interface Restaurant {
    * from their old location and have them syn across locations, which is why
    * we refer to menu item ids instead of declaring menu items
    */
-  menuItemIds: Set<string>;
+  menuItemIds: string[];
 
   /**
    * Even with sync menus, some locations may be out of ingredients.
    * This array allows restaurants to temporarily take items off the menu
    * If they are out of stock
    */
-  outOfStockItemIds: Set<string>;
+  outOfStockItemIds: string[];
 
   /**
    * An array of table id associated with the restaurant
@@ -47,7 +47,7 @@ export default interface Restaurant {
    * can easily aggregate cross-restaurant data
    * for pattern analysis
    */
-  tableIds: Set<string>;
+  tableIds: string[];
 
   /**
    * An array of bookings for the restaurant
@@ -55,7 +55,7 @@ export default interface Restaurant {
    * can easily aggregate cross-restaurant data
    * for pattern analysis
    */
-  reservationIds: Set<string>;
+  reservationIds: string[];
 
   /**
    * An array of operational hours throughout the week

@@ -8,56 +8,90 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as IndexRouteImport } from './routes/index'
+import { createFileRoute } from '@tanstack/react-router'
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as RestaurantsLomansPizzaLayoutRouteImport } from './routes/restaurants/lomans-pizza/_layout'
+import { Route as RestaurantsLomansPizzaLayoutIndexRouteImport } from './routes/restaurants/lomans-pizza/_layout.index'
+import { Route as RestaurantsLomansPizzaLayoutMenuRouteImport } from './routes/restaurants/lomans-pizza/_layout.menu'
+
+const RestaurantsLomansPizzaRouteImport = createFileRoute(
+  '/restaurants/lomans-pizza',
+)()
+
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RestaurantsLomansPizzaRoute = RestaurantsLomansPizzaRouteImport.update({
+  id: '/restaurants/lomans-pizza',
+  path: '/restaurants/lomans-pizza',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RestaurantsLomansPizzaLayoutRoute =
+  RestaurantsLomansPizzaLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => RestaurantsLomansPizzaRoute,
+  } as any)
+const RestaurantsLomansPizzaLayoutIndexRoute =
+  RestaurantsLomansPizzaLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => RestaurantsLomansPizzaLayoutRoute,
+  } as any)
+const RestaurantsLomansPizzaLayoutMenuRoute =
+  RestaurantsLomansPizzaLayoutMenuRouteImport.update({
+    id: '/menu',
+    path: '/menu',
+    getParentRoute: () => RestaurantsLomansPizzaLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/restaurants/lomans-pizza': typeof RestaurantsLomansPizzaLayoutRouteWithChildren
+  '/restaurants/lomans-pizza/menu': typeof RestaurantsLomansPizzaLayoutMenuRoute
+  '/restaurants/lomans-pizza/': typeof RestaurantsLomansPizzaLayoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/restaurants/lomans-pizza': typeof RestaurantsLomansPizzaLayoutIndexRoute
+  '/restaurants/lomans-pizza/menu': typeof RestaurantsLomansPizzaLayoutMenuRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/restaurants/lomans-pizza': typeof RestaurantsLomansPizzaRouteWithChildren
+  '/restaurants/lomans-pizza/_layout': typeof RestaurantsLomansPizzaLayoutRouteWithChildren
+  '/restaurants/lomans-pizza/_layout/menu': typeof RestaurantsLomansPizzaLayoutMenuRoute
+  '/restaurants/lomans-pizza/_layout/': typeof RestaurantsLomansPizzaLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/restaurants/lomans-pizza'
+    | '/restaurants/lomans-pizza/menu'
+    | '/restaurants/lomans-pizza/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/restaurants/lomans-pizza' | '/restaurants/lomans-pizza/menu'
+  id:
+    | '__root__'
+    | '/'
+    | '/restaurants/lomans-pizza'
+    | '/restaurants/lomans-pizza/_layout'
+    | '/restaurants/lomans-pizza/_layout/menu'
+    | '/restaurants/lomans-pizza/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  RestaurantsLomansPizzaRoute: typeof RestaurantsLomansPizzaRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -65,12 +99,73 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/restaurants/lomans-pizza': {
+      id: '/restaurants/lomans-pizza'
+      path: '/restaurants/lomans-pizza'
+      fullPath: '/restaurants/lomans-pizza'
+      preLoaderRoute: typeof RestaurantsLomansPizzaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/restaurants/lomans-pizza/_layout': {
+      id: '/restaurants/lomans-pizza/_layout'
+      path: '/restaurants/lomans-pizza'
+      fullPath: '/restaurants/lomans-pizza'
+      preLoaderRoute: typeof RestaurantsLomansPizzaLayoutRouteImport
+      parentRoute: typeof RestaurantsLomansPizzaRoute
+    }
+    '/restaurants/lomans-pizza/_layout/': {
+      id: '/restaurants/lomans-pizza/_layout/'
+      path: '/'
+      fullPath: '/restaurants/lomans-pizza/'
+      preLoaderRoute: typeof RestaurantsLomansPizzaLayoutIndexRouteImport
+      parentRoute: typeof RestaurantsLomansPizzaLayoutRoute
+    }
+    '/restaurants/lomans-pizza/_layout/menu': {
+      id: '/restaurants/lomans-pizza/_layout/menu'
+      path: '/menu'
+      fullPath: '/restaurants/lomans-pizza/menu'
+      preLoaderRoute: typeof RestaurantsLomansPizzaLayoutMenuRouteImport
+      parentRoute: typeof RestaurantsLomansPizzaLayoutRoute
+    }
   }
 }
 
+interface RestaurantsLomansPizzaLayoutRouteChildren {
+  RestaurantsLomansPizzaLayoutMenuRoute: typeof RestaurantsLomansPizzaLayoutMenuRoute
+  RestaurantsLomansPizzaLayoutIndexRoute: typeof RestaurantsLomansPizzaLayoutIndexRoute
+}
+
+const RestaurantsLomansPizzaLayoutRouteChildren: RestaurantsLomansPizzaLayoutRouteChildren =
+  {
+    RestaurantsLomansPizzaLayoutMenuRoute:
+      RestaurantsLomansPizzaLayoutMenuRoute,
+    RestaurantsLomansPizzaLayoutIndexRoute:
+      RestaurantsLomansPizzaLayoutIndexRoute,
+  }
+
+const RestaurantsLomansPizzaLayoutRouteWithChildren =
+  RestaurantsLomansPizzaLayoutRoute._addFileChildren(
+    RestaurantsLomansPizzaLayoutRouteChildren,
+  )
+
+interface RestaurantsLomansPizzaRouteChildren {
+  RestaurantsLomansPizzaLayoutRoute: typeof RestaurantsLomansPizzaLayoutRouteWithChildren
+}
+
+const RestaurantsLomansPizzaRouteChildren: RestaurantsLomansPizzaRouteChildren =
+  {
+    RestaurantsLomansPizzaLayoutRoute:
+      RestaurantsLomansPizzaLayoutRouteWithChildren,
+  }
+
+const RestaurantsLomansPizzaRouteWithChildren =
+  RestaurantsLomansPizzaRoute._addFileChildren(
+    RestaurantsLomansPizzaRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  RestaurantsLomansPizzaRoute: RestaurantsLomansPizzaRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

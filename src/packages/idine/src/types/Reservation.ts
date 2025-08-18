@@ -1,7 +1,7 @@
 import Allergen from "../enums/Allergen";
 import Diet from "../enums/Diet";
 import ReservationStatus from "../enums/ReservationStatus";
-import ExactDuration from "./ExactDuration";
+import RelativeISODateTimeString from "./RelativeISODateTimeString";
 import SeatingComposition from "./SeatingComposition";
 
 export default interface Reservation {
@@ -9,8 +9,29 @@ export default interface Reservation {
 
   /**
    * guest who made reservation
+   * if undefined, user is guest
    */
-  guestId: string;
+  guestId?: string;
+
+  /**
+   * These will be auto populated if the guest is logged in
+   * otherwise, they must be filled out
+   */
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  /**
+   * Items in this list are **filtered out of the safe menu** for the table
+   *  at the restaurant, guests can change their menus independently
+   */
+  allergies: Allergen[];
+
+  /**
+   * Items in this list are **highlighted in the safe menu** for the table
+   * at the restaurant, guests can change their menus independently
+   */
+  diets: Diet[];
 
   /**
    * Restaurant associated with the reservation
@@ -30,32 +51,16 @@ export default interface Reservation {
   // determined by the user
   partySize: number;
 
-  /**
-   * ISO string representing the date and time that a reservation takes place.
-   *
-   * The end time is determined by adding default reservation length to the startTime,
-   * so it does not need to be stored.
-   *
-   *
-   */
-  duration: ExactDuration;
+  date: Date;
+
+  targetTime?: RelativeISODateTimeString;
 
   /**
-   * ISO string representing the date and time
-   *
-   * If a reservation is created, it is held for defaultHold
+   * transformed to duration once reservation is confirmed
+   * Assume that end time can always be calculated by adding 90
+   * minutes to the start time
    */
-  holdDuration: ExactDuration;
-
-  /**
-   * Items in this list are **filtered out of the safe menu**
-   */
-  allergies: Allergen[];
-
-  /**
-   * Items in this list are **highlighted in the safe menu**
-   */
-  diets: Diet[];
+  startTimeISO?: RelativeISODateTimeString;
 
   status: ReservationStatus;
 

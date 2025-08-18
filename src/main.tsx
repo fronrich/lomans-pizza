@@ -2,6 +2,8 @@ import { StrictMode } from "react";
 import { ThemeProvider } from "flowbite-react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { ThemeInit } from "../.flowbite-react/init";
+import { IDineProvider } from "./packages/idine";
 import theme from "./theme";
 import "./index.css";
 
@@ -24,9 +26,12 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+      <IDineProvider>
+        <ThemeProvider theme={theme}>
+          <ThemeInit />
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </IDineProvider>
     </StrictMode>
   );
 }

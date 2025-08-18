@@ -1,6 +1,6 @@
 enum Allergen {
   PEANUTS,
-  TREE_NUTS,
+  NUTS,
   DAIRY,
   SHELLFISH,
   FISH,

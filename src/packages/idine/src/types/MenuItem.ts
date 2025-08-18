@@ -3,6 +3,7 @@ import Diet from "../enums/Diet";
 import MenuCategory from "../enums/MenuCategory";
 
 export default interface MenuItem {
+  id: string;
   name: string;
 
   /**

@@ -1,9 +1,9 @@
 enum MenuCategory {
   APPETIZER,
-  ENTRE,
+  ENTREE,
   SIDE,
   DRINK,
-  DESERT,
+  DESSERT,
 }
 
 export default MenuCategory;

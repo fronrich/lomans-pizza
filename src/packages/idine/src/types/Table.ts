@@ -13,7 +13,7 @@ export default interface Table {
    * A positive integer that employees can refer to when
    * serving tables
    */
-  serverIndex: number;
+  serverIndex: string;
 
   /**
    * The number of seats a table may have
