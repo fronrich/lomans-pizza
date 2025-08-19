@@ -10,7 +10,7 @@ export default interface Table {
   id: string;
 
   /**
-   * A positive integer that employees can refer to when
+   * An id that employees can refer to when
    * serving tables
    */
   serverIndex: string;

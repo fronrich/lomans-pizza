@@ -12,6 +12,10 @@ const DefaultReservation: Reservation = {
   phone: "",
   restaurantId: "",
   date: new Date(),
+  tableServerIndices: [],
+  targetTime: "",
+  startDate: null,
+  startTimeISO: "",
   seatingComposition: {
     infants: 0,
     regular: 0,

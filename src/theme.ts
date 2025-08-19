@@ -2,10 +2,12 @@ import { createTheme } from "flowbite-react";
 
 export default createTheme({
   button: {
-    base: "relative flex items-center justify-center rounded-lg text-center font-medium focus:outline-none focus:ring-4 transition-all cursor-pointer font-base font-semibold uppercase shadow",
+    base: "relative flex items-center justify-center rounded-lg text-center focus:outline-none focus:ring-4 transition-all cursor-pointer font-base font-semibold uppercase shadow border-1 ",
     color: {
+      default:
+        "bg-primary-700 text-white hover:bg-primary-800 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 border-primary-700",
       secondary:
-        "bg-secondary-700 text-surface-950 hover:bg-secondary-800 focus:ring-secondary-300 dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-800",
+        "bg-secondary-700 text-surface-950 hover:bg-secondary-800 focus:ring-secondary-300 dark:bg-secondary-600 dark:hover:bg-secondary-700 dark:focus:ring-secondary-800 border-secondary-800",
     },
     outlineColor: {
       secondary:
@@ -27,7 +29,7 @@ export default createTheme({
             base: "w-full rounded-t-lg !flex-nowrap lg:text-base text-xs !z-0 lg:flex-row flex-col",
             active: {
               on: "rounded-t-lg border-b-2 border-primary-500 text-primary-500 font-semibold ",
-              off: "border-b-2 border-transparent text-surface-200 hover:border-primary-500 hover:text-primary-500 ",
+              off: "border-b-2 border-transparent text-surface-950 hover:border-primary-500 hover:text-primary-500 ",
             },
           },
           fullWidth: {

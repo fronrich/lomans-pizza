@@ -1,3 +1,4 @@
+import Menu from "$lib/lomans-pizza/components/Menu";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/restaurants/lomans-pizza/_layout/menu")({
@@ -5,5 +6,5 @@ export const Route = createFileRoute("/restaurants/lomans-pizza/_layout/menu")({
 });
 
 function RouteComponent() {
-  return <div>Hello "/restaurants/lomans-pizza/_layout/menu"!</div>;
+  return <Menu />;
 }

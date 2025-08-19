@@ -11,9 +11,9 @@ const IDineAvatar = () => {
   return (
     <Popover
       placement="bottom"
-      className="motion-opacity-in-0"
+      className="motion-opacity-in-0 shadow-lg"
       content={
-        <Card className="bg-surface-200 w-96">
+        <Card className="bg-surface-50 w-96 border-[1px] border-surface-300">
           <div className="flex gap-2 items-end justify-between">
             <span className="font-heading text-xl">
               {currentUser?.firstName} {currentUser?.lastName}
@@ -33,8 +33,8 @@ const IDineAvatar = () => {
               </Badge>
             </abbr>
           )}
-          <Button color="secondary">Manage {restaurant?.name}</Button>
-          <Button color="secondary">My Reservations</Button>
+          <Button color="alternative">Manage {restaurant?.name}</Button>
+          <Button color="alternative">My Reservations</Button>
           <Button onClick={googleSignOut}>Sign Out</Button>
         </Card>
       }

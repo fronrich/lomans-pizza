@@ -1,8 +1,14 @@
 import { Button } from "flowbite-react";
+import { useNavigate } from "@tanstack/react-router";
 
 const MenuButton = () => {
+  const nav = useNavigate();
   return (
-    <Button className="w-full" color="secondary">
+    <Button
+      onClick={() => nav({ to: "/restaurants/lomans-pizza/menu" })}
+      className="w-full"
+      color="alternative"
+    >
       View the Menu
     </Button>
   );

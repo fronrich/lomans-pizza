@@ -245,25 +245,26 @@ export default ({
       if (!tableId) continue;
 
       const iso = toISODateTimeString(slotStart);
+      const hhmm = extractTimePart(iso); // <- only "HH:MM"
       const key = `${iso}:${tableId}`;
       if (addedSlots.has(key)) continue;
       addedSlots.add(key);
 
-      const suggestionDate = dateOnly(slotStart); // date-only (midnight) representing the day for the suggestion
+      const suggestionDate = dateOnly(slotStart);
 
       // Add to sameDayTimes if calendar date equals desired date
       if (sameCalendarDay(slotStart, desiredDateOnly)) {
-        sameDayTimes.push({ time: iso, tableId, date: suggestionDate });
+        sameDayTimes.push({ time: hhmm, tableId, date: suggestionDate });
       }
 
       // Add to sameTimeOfDayTimes if same AM/PM as requested
       const slotIsAM = slotStart.getHours() < 12;
       if (slotIsAM === requestedIsAM) {
-        sameTimeOfDayTimes.push({ time: iso, tableId, date: suggestionDate });
+        sameTimeOfDayTimes.push({ time: hhmm, tableId, date: suggestionDate });
       }
 
       // All valid slots in the window go in nextSevenDayTimes
-      nextSevenDayTimes.push({ time: iso, tableId, date: suggestionDate });
+      nextSevenDayTimes.push({ time: hhmm, tableId, date: suggestionDate });
     }
   }
 

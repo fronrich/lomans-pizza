@@ -5,13 +5,17 @@ import convert24ToAmPm from "../../utils/convert24ToAmPm";
 import { FC } from "react";
 import Reservation from "../../types/Reservation";
 
+import useIcon from "../../hooks/render/useIcon";
+
 interface TimeSelectorProps {
   register: UseFormRegister<Reservation>;
 }
 
 const TimeSelector: FC<TimeSelectorProps> = ({ register }) => {
+  const icon = useIcon("carbon:time-filled");
   return (
-    <Select {...register("targetTime")}>
+    <Select {...register("targetTime")} icon={icon}>
+      <option value={""}>Please Select a Time</option>
       {ALL_30_MINUTE_INTERVALS.map((interval) => (
         <option key={interval} value={interval}>
           {convert24ToAmPm(interval)}

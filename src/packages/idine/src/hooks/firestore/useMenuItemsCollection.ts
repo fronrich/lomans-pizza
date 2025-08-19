@@ -10,7 +10,7 @@ export default () => {
     getDocumentsByQuery,
     subscribeToDocumentsByQuery,
   } = useCRUD<MenuItem>({
-    collectionName: "tables",
+    collectionName: "menuItems",
   });
 
   const createMenuItem = async (

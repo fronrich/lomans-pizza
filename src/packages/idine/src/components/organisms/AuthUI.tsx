@@ -12,7 +12,6 @@ const AuthUI = () => {
   const { currentUser } = useProfilesContext();
 
   const { isAuthReady } = useAuthContext();
-  console.log(isAuthReady);
 
   if (!isAuthReady) {
     return (

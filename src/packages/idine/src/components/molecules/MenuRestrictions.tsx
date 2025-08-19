@@ -1,29 +1,22 @@
+import { FC } from "react";
 import { Checkbox, Label } from "flowbite-react";
 import AllergenVisual from "./AllergenVisual";
 import Allergen from "../../enums/Allergen";
 import DietVisual from "./DietVisual";
-import { FC } from "react";
-import { UseFormRegister } from "react-hook-form";
 import Diet from "../../enums/Diet";
 import enumToArray from "../../utils/enumToArray";
 import WrappingFlexbox from "../atoms/WrappingFlexbox";
+import useReservationFormContext from "../../hooks/contexts/useReservationFormContext";
 
-interface MenuRestrictionsProps {
-  /**
-   * allows menu restrictions to be generic enough to use with any form
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register: UseFormRegister<any>;
-}
-
-const MenuRestrictions: FC<MenuRestrictionsProps> = ({ register }) => {
+const MenuRestrictions: FC = () => {
+  const { register } = useReservationFormContext();
   return (
     <>
       <details>
         <summary>
           <span className="font-semibold uppercase">Allergens</span>
         </summary>
-        <div className="bg-surface-50 !text-surface-950 rounded-lg p-2 border-surface-100 border-2">
+        <div className="bg-surface-50 !text-surface-950 rounded-lg p-2 border-surface-300 border-[1px] shadow">
           <WrappingFlexbox>
             {enumToArray(Allergen).map((allergen) => (
               <div key={allergen} className="flex items-center gap-2 p-2">
@@ -51,7 +44,7 @@ const MenuRestrictions: FC<MenuRestrictionsProps> = ({ register }) => {
         <summary>
           <span className="font-semibold uppercase">Diets</span>
         </summary>
-        <div className="bg-surface-50 !text-surface-950 rounded-lg p-2 border-surface-100 border-2">
+        <div className="bg-surface-50 !text-surface-950 rounded-lg p-2 border-surface-300 border-[1px] shadow">
           <WrappingFlexbox>
             {enumToArray(Diet).map((diet) => (
               <div key={diet} className="flex items-center gap-2 p-2">

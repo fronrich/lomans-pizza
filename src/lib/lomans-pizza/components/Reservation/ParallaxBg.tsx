@@ -10,7 +10,7 @@ const ParallaxBg: FC<ParallaxBgProps> = ({ children }) => {
   return (
     <section
       id="reservation"
-      className="relative w-screen h-screen flex flex-col gap-4 items-center justify-center overflow-clip bg-fixed bg-cover bg-center lg:p-8"
+      className="relative w-screen h-screen flex flex-col gap-4 items-center justify-start lg:pt-48 overflow-clip bg-fixed bg-cover bg-center lg:p-8"
       style={{
         backgroundImage: `url(${bg})`,
       }}

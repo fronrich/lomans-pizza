@@ -31,7 +31,6 @@ export default () => {
       tables: tables,
     });
 
-    console.log(suggestions);
     return suggestions;
   }, [partySize, date, time]);
 

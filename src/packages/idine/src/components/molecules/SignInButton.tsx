@@ -4,13 +4,18 @@ import Glyph from "../atoms/Glyph";
 const SignInButton = () => {
   const { googleSignIn } = useAuthContext();
   return (
-    <Button
-      onClick={googleSignIn}
-      className="flex items-center justify-center gap-2 motion-scale-in-0"
+    <abbr
+      className="no-underline"
+      title="Sign in to reserve faster, get diet friendly menus, and explore restaurants"
     >
-      <span>Sign in</span>
-      <Glyph />
-    </Button>
+      <Button
+        onClick={googleSignIn}
+        className="flex items-center justify-center gap-2 motion-scale-in-0"
+      >
+        <span>Sign in</span>
+        <Glyph />
+      </Button>
+    </abbr>
   );
 };
 

@@ -14,6 +14,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RestaurantsLomansPizzaLayoutRouteImport } from './routes/restaurants/lomans-pizza/_layout'
 import { Route as RestaurantsLomansPizzaLayoutIndexRouteImport } from './routes/restaurants/lomans-pizza/_layout.index'
+import { Route as RestaurantsLomansPizzaLayoutTosRouteImport } from './routes/restaurants/lomans-pizza/_layout.tos'
 import { Route as RestaurantsLomansPizzaLayoutMenuRouteImport } from './routes/restaurants/lomans-pizza/_layout.menu'
 
 const RestaurantsLomansPizzaRouteImport = createFileRoute(
@@ -41,6 +42,12 @@ const RestaurantsLomansPizzaLayoutIndexRoute =
     path: '/',
     getParentRoute: () => RestaurantsLomansPizzaLayoutRoute,
   } as any)
+const RestaurantsLomansPizzaLayoutTosRoute =
+  RestaurantsLomansPizzaLayoutTosRouteImport.update({
+    id: '/tos',
+    path: '/tos',
+    getParentRoute: () => RestaurantsLomansPizzaLayoutRoute,
+  } as any)
 const RestaurantsLomansPizzaLayoutMenuRoute =
   RestaurantsLomansPizzaLayoutMenuRouteImport.update({
     id: '/menu',
@@ -52,12 +59,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/restaurants/lomans-pizza': typeof RestaurantsLomansPizzaLayoutRouteWithChildren
   '/restaurants/lomans-pizza/menu': typeof RestaurantsLomansPizzaLayoutMenuRoute
+  '/restaurants/lomans-pizza/tos': typeof RestaurantsLomansPizzaLayoutTosRoute
   '/restaurants/lomans-pizza/': typeof RestaurantsLomansPizzaLayoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/restaurants/lomans-pizza': typeof RestaurantsLomansPizzaLayoutIndexRoute
   '/restaurants/lomans-pizza/menu': typeof RestaurantsLomansPizzaLayoutMenuRoute
+  '/restaurants/lomans-pizza/tos': typeof RestaurantsLomansPizzaLayoutTosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -65,6 +74,7 @@ export interface FileRoutesById {
   '/restaurants/lomans-pizza': typeof RestaurantsLomansPizzaRouteWithChildren
   '/restaurants/lomans-pizza/_layout': typeof RestaurantsLomansPizzaLayoutRouteWithChildren
   '/restaurants/lomans-pizza/_layout/menu': typeof RestaurantsLomansPizzaLayoutMenuRoute
+  '/restaurants/lomans-pizza/_layout/tos': typeof RestaurantsLomansPizzaLayoutTosRoute
   '/restaurants/lomans-pizza/_layout/': typeof RestaurantsLomansPizzaLayoutIndexRoute
 }
 export interface FileRouteTypes {
@@ -73,15 +83,21 @@ export interface FileRouteTypes {
     | '/'
     | '/restaurants/lomans-pizza'
     | '/restaurants/lomans-pizza/menu'
+    | '/restaurants/lomans-pizza/tos'
     | '/restaurants/lomans-pizza/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/restaurants/lomans-pizza' | '/restaurants/lomans-pizza/menu'
+  to:
+    | '/'
+    | '/restaurants/lomans-pizza'
+    | '/restaurants/lomans-pizza/menu'
+    | '/restaurants/lomans-pizza/tos'
   id:
     | '__root__'
     | '/'
     | '/restaurants/lomans-pizza'
     | '/restaurants/lomans-pizza/_layout'
     | '/restaurants/lomans-pizza/_layout/menu'
+    | '/restaurants/lomans-pizza/_layout/tos'
     | '/restaurants/lomans-pizza/_layout/'
   fileRoutesById: FileRoutesById
 }
@@ -120,6 +136,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RestaurantsLomansPizzaLayoutIndexRouteImport
       parentRoute: typeof RestaurantsLomansPizzaLayoutRoute
     }
+    '/restaurants/lomans-pizza/_layout/tos': {
+      id: '/restaurants/lomans-pizza/_layout/tos'
+      path: '/tos'
+      fullPath: '/restaurants/lomans-pizza/tos'
+      preLoaderRoute: typeof RestaurantsLomansPizzaLayoutTosRouteImport
+      parentRoute: typeof RestaurantsLomansPizzaLayoutRoute
+    }
     '/restaurants/lomans-pizza/_layout/menu': {
       id: '/restaurants/lomans-pizza/_layout/menu'
       path: '/menu'
@@ -132,6 +155,7 @@ declare module '@tanstack/react-router' {
 
 interface RestaurantsLomansPizzaLayoutRouteChildren {
   RestaurantsLomansPizzaLayoutMenuRoute: typeof RestaurantsLomansPizzaLayoutMenuRoute
+  RestaurantsLomansPizzaLayoutTosRoute: typeof RestaurantsLomansPizzaLayoutTosRoute
   RestaurantsLomansPizzaLayoutIndexRoute: typeof RestaurantsLomansPizzaLayoutIndexRoute
 }
 
@@ -139,6 +163,7 @@ const RestaurantsLomansPizzaLayoutRouteChildren: RestaurantsLomansPizzaLayoutRou
   {
     RestaurantsLomansPizzaLayoutMenuRoute:
       RestaurantsLomansPizzaLayoutMenuRoute,
+    RestaurantsLomansPizzaLayoutTosRoute: RestaurantsLomansPizzaLayoutTosRoute,
     RestaurantsLomansPizzaLayoutIndexRoute:
       RestaurantsLomansPizzaLayoutIndexRoute,
   }

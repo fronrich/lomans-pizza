@@ -10,7 +10,7 @@ export default () => {
     getDocumentsByQuery,
     subscribeToDocumentsByQuery,
   } = useCRUD<Reservation>({
-    collectionName: "tables",
+    collectionName: "reservations",
   });
 
   const createReservation = async (

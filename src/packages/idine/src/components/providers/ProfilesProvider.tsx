@@ -74,8 +74,6 @@ const ProfilesProvider: FC<ProfilesProviderProps> = ({ children }) => {
         return;
       }
 
-      console.log(restaurant);
-
       const { tableIds, menuItemIds, reservationIds } = restaurant;
 
       if (tableIds.length > 0) {
@@ -91,8 +89,6 @@ const ProfilesProvider: FC<ProfilesProviderProps> = ({ children }) => {
           await getReservationsByQuery("id", "in", reservationIds)
         );
       }
-
-      console.log(tables, menuItems, reservations);
     };
 
     getRestaurantAssets();
@@ -103,6 +99,7 @@ const ProfilesProvider: FC<ProfilesProviderProps> = ({ children }) => {
   const value = useMemo(
     () => ({
       restaurant,
+      setRestaurant,
       currentUser,
       setCurrentUser,
       tables,

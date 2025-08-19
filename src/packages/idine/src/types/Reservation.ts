@@ -46,21 +46,34 @@ export default interface Reservation {
    */
   tableIds: string[];
 
+  /**
+   * For easy access for management dashboard
+   */
+  tableServerIndices: string[];
+
   seatingComposition: SeatingComposition;
 
   // determined by the user
   partySize: number;
 
-  date: Date;
+  /**
+   * Suggested date to look around
+   */
+  date?: Date;
 
   targetTime?: RelativeISODateTimeString;
+
+  /**
+   * actual date of the reservation
+   */
+  startDate: Date | null;
 
   /**
    * transformed to duration once reservation is confirmed
    * Assume that end time can always be calculated by adding 90
    * minutes to the start time
    */
-  startTimeISO?: RelativeISODateTimeString;
+  startTimeISO: RelativeISODateTimeString;
 
   status: ReservationStatus;
 
