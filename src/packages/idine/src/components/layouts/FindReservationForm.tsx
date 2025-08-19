@@ -58,7 +58,19 @@ const FindReservationForm = () => {
           >
             <ReservationInfo />
           </TabItem>
-          <TabItem title="" icon={accommodationsIcon}>
+          <TabItem
+            disabled={
+              !firstName.length ||
+              !lastName.length ||
+              !phone.length ||
+              !email.length ||
+              !startDate ||
+              !startTimeISO ||
+              !partySize
+            }
+            title=""
+            icon={accommodationsIcon}
+          >
             <AccommodationInfo />
           </TabItem>
           <TabItem

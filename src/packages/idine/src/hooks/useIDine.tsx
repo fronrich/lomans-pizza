@@ -19,6 +19,7 @@ import shouldHighlight from "../utils/shouldHighlight";
 import { useMemo } from "react";
 import formatDatePretty from "../utils/formatDatePretty";
 import convert24ToAmPm from "../utils/convert24ToAmPm";
+import ReservationConfirmation from "../components/organisms/ReservationConfirmation";
 
 export default () => {
   const { restaurant, currentUser, reservations } = useProfilesContext();
@@ -72,6 +73,7 @@ export default () => {
       organisms: {
         AuthUI,
         FindReservationForm,
+        ReservationConfirmation,
       },
     },
   };

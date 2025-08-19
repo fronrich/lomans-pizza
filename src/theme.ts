@@ -24,11 +24,12 @@ export default createTheme({
           "-mb-px flex-nowrap border-b border-gray-200 dark:border-gray-700",
       },
       tabitem: {
+        base: "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500 disabled:blur-xs transition-all",
         variant: {
           underline: {
             base: "w-full rounded-t-lg !flex-nowrap lg:text-base text-xs !z-0 lg:flex-row flex-col",
             active: {
-              on: "rounded-t-lg border-b-2 border-primary-500 text-primary-500 font-semibold ",
+              on: "rounded-t-lg border-b-4 border-primary-500 text-primary-500 font-semibold ",
               off: "border-b-2 border-transparent text-surface-950 hover:border-primary-500 hover:text-primary-500 ",
             },
           },

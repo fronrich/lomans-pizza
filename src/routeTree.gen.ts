@@ -12,15 +12,24 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIdineRouteImport } from './routes/dashboard/_idine'
+import { Route as DashboardIdineIndexRouteImport } from './routes/dashboard/_idine.index'
 import { Route as RestaurantsLomansPizzaLayoutRouteImport } from './routes/restaurants/lomans-pizza/_layout'
 import { Route as RestaurantsLomansPizzaLayoutIndexRouteImport } from './routes/restaurants/lomans-pizza/_layout.index'
 import { Route as RestaurantsLomansPizzaLayoutTosRouteImport } from './routes/restaurants/lomans-pizza/_layout.tos'
 import { Route as RestaurantsLomansPizzaLayoutMenuRouteImport } from './routes/restaurants/lomans-pizza/_layout.menu'
+import { Route as ConfirmationNumberNamePhoneRouteImport } from './routes/confirmation/$number.$name.$phone'
 
+const DashboardRouteImport = createFileRoute('/dashboard')()
 const RestaurantsLomansPizzaRouteImport = createFileRoute(
   '/restaurants/lomans-pizza',
 )()
 
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -30,6 +39,15 @@ const RestaurantsLomansPizzaRoute = RestaurantsLomansPizzaRouteImport.update({
   id: '/restaurants/lomans-pizza',
   path: '/restaurants/lomans-pizza',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIdineRoute = DashboardIdineRouteImport.update({
+  id: '/_idine',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardIdineIndexRoute = DashboardIdineIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardIdineRoute,
 } as any)
 const RestaurantsLomansPizzaLayoutRoute =
   RestaurantsLomansPizzaLayoutRouteImport.update({
@@ -54,25 +72,40 @@ const RestaurantsLomansPizzaLayoutMenuRoute =
     path: '/menu',
     getParentRoute: () => RestaurantsLomansPizzaLayoutRoute,
   } as any)
+const ConfirmationNumberNamePhoneRoute =
+  ConfirmationNumberNamePhoneRouteImport.update({
+    id: '/confirmation/$number/$name/$phone',
+    path: '/confirmation/$number/$name/$phone',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardIdineRouteWithChildren
   '/restaurants/lomans-pizza': typeof RestaurantsLomansPizzaLayoutRouteWithChildren
+  '/dashboard/': typeof DashboardIdineIndexRoute
+  '/confirmation/$number/$name/$phone': typeof ConfirmationNumberNamePhoneRoute
   '/restaurants/lomans-pizza/menu': typeof RestaurantsLomansPizzaLayoutMenuRoute
   '/restaurants/lomans-pizza/tos': typeof RestaurantsLomansPizzaLayoutTosRoute
   '/restaurants/lomans-pizza/': typeof RestaurantsLomansPizzaLayoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardIdineIndexRoute
   '/restaurants/lomans-pizza': typeof RestaurantsLomansPizzaLayoutIndexRoute
+  '/confirmation/$number/$name/$phone': typeof ConfirmationNumberNamePhoneRoute
   '/restaurants/lomans-pizza/menu': typeof RestaurantsLomansPizzaLayoutMenuRoute
   '/restaurants/lomans-pizza/tos': typeof RestaurantsLomansPizzaLayoutTosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/_idine': typeof DashboardIdineRouteWithChildren
   '/restaurants/lomans-pizza': typeof RestaurantsLomansPizzaRouteWithChildren
   '/restaurants/lomans-pizza/_layout': typeof RestaurantsLomansPizzaLayoutRouteWithChildren
+  '/dashboard/_idine/': typeof DashboardIdineIndexRoute
+  '/confirmation/$number/$name/$phone': typeof ConfirmationNumberNamePhoneRoute
   '/restaurants/lomans-pizza/_layout/menu': typeof RestaurantsLomansPizzaLayoutMenuRoute
   '/restaurants/lomans-pizza/_layout/tos': typeof RestaurantsLomansPizzaLayoutTosRoute
   '/restaurants/lomans-pizza/_layout/': typeof RestaurantsLomansPizzaLayoutIndexRoute
@@ -81,21 +114,30 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dashboard'
     | '/restaurants/lomans-pizza'
+    | '/dashboard/'
+    | '/confirmation/$number/$name/$phone'
     | '/restaurants/lomans-pizza/menu'
     | '/restaurants/lomans-pizza/tos'
     | '/restaurants/lomans-pizza/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dashboard'
     | '/restaurants/lomans-pizza'
+    | '/confirmation/$number/$name/$phone'
     | '/restaurants/lomans-pizza/menu'
     | '/restaurants/lomans-pizza/tos'
   id:
     | '__root__'
     | '/'
+    | '/dashboard'
+    | '/dashboard/_idine'
     | '/restaurants/lomans-pizza'
     | '/restaurants/lomans-pizza/_layout'
+    | '/dashboard/_idine/'
+    | '/confirmation/$number/$name/$phone'
     | '/restaurants/lomans-pizza/_layout/menu'
     | '/restaurants/lomans-pizza/_layout/tos'
     | '/restaurants/lomans-pizza/_layout/'
@@ -103,11 +145,20 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   RestaurantsLomansPizzaRoute: typeof RestaurantsLomansPizzaRouteWithChildren
+  ConfirmationNumberNamePhoneRoute: typeof ConfirmationNumberNamePhoneRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,6 +172,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/restaurants/lomans-pizza'
       preLoaderRoute: typeof RestaurantsLomansPizzaRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/_idine': {
+      id: '/dashboard/_idine'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardIdineRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/_idine/': {
+      id: '/dashboard/_idine/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIdineIndexRouteImport
+      parentRoute: typeof DashboardIdineRoute
     }
     '/restaurants/lomans-pizza/_layout': {
       id: '/restaurants/lomans-pizza/_layout'
@@ -150,8 +215,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RestaurantsLomansPizzaLayoutMenuRouteImport
       parentRoute: typeof RestaurantsLomansPizzaLayoutRoute
     }
+    '/confirmation/$number/$name/$phone': {
+      id: '/confirmation/$number/$name/$phone'
+      path: '/confirmation/$number/$name/$phone'
+      fullPath: '/confirmation/$number/$name/$phone'
+      preLoaderRoute: typeof ConfirmationNumberNamePhoneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
+
+interface DashboardIdineRouteChildren {
+  DashboardIdineIndexRoute: typeof DashboardIdineIndexRoute
+}
+
+const DashboardIdineRouteChildren: DashboardIdineRouteChildren = {
+  DashboardIdineIndexRoute: DashboardIdineIndexRoute,
+}
+
+const DashboardIdineRouteWithChildren = DashboardIdineRoute._addFileChildren(
+  DashboardIdineRouteChildren,
+)
+
+interface DashboardRouteChildren {
+  DashboardIdineRoute: typeof DashboardIdineRouteWithChildren
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardIdineRoute: DashboardIdineRouteWithChildren,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
 
 interface RestaurantsLomansPizzaLayoutRouteChildren {
   RestaurantsLomansPizzaLayoutMenuRoute: typeof RestaurantsLomansPizzaLayoutMenuRoute
@@ -190,7 +286,9 @@ const RestaurantsLomansPizzaRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   RestaurantsLomansPizzaRoute: RestaurantsLomansPizzaRouteWithChildren,
+  ConfirmationNumberNamePhoneRoute: ConfirmationNumberNamePhoneRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -56,18 +56,22 @@ const ConfirmationInfo = () => {
             {allergies.map((allergen) => (
               <AllergenVisual key={allergen} allergen={Number(allergen)} />
             ))}
-            |
+            {!!allergies.length && "|"}
             {diets.map((diet) => (
               <DietVisual key={diet} diet={Number(diet)} />
             ))}
-            |
-            <div className="flex flex-nowrap items-center">
-              <Icon icon={"noto:baby"} />×{seatingComposition.infants}
-            </div>
-            <div className="flex flex-nowrap items-center">
-              <Icon icon={"noto:woman-in-manual-wheelchair"} />×
-              {seatingComposition.wheelchairAccessible}
-            </div>
+            {!!diets.length && "|"}
+            {Number(seatingComposition.infants) > 0 && (
+              <div className="flex flex-nowrap items-center">
+                <Icon icon={"noto:baby"} />×{seatingComposition.infants}
+              </div>
+            )}
+            {Number(seatingComposition.wheelchairAccessible) > 0 && (
+              <div className="flex flex-nowrap items-center">
+                <Icon icon={"noto:woman-in-manual-wheelchair"} />×
+                {seatingComposition.wheelchairAccessible}
+              </div>
+            )}
           </div>
           {requests && (
             <span>

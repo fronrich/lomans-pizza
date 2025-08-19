@@ -8,6 +8,7 @@ import useUsersCollection from "../firestore/useUsersCollection";
 import useRestaurantsCollection from "../firestore/useRestaurantsCollection";
 import User from "../../types/User";
 import Restaurant from "../../types/Restaurant";
+import ReservationStatus from "../../enums/ReservationStatus";
 
 export default () => {
   const { handleSubmit, ...rest } = useFormContext() as UseFormReturn<
@@ -39,6 +40,14 @@ export default () => {
 
       // add restaurant id to reservation
       cleanedData.restaurantId = restaurant?.id;
+
+      // make anon if no user
+      if (!currentUser) {
+        cleanedData.guestId = "anon";
+      }
+
+      // confirm reservation
+      cleanedData.status = ReservationStatus.CONFIRMED;
 
       console.log(cleanedData);
 
