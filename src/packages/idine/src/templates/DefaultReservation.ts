@@ -21,6 +21,7 @@ const DefaultReservation: Reservation = {
     regular: 0,
     wheelchairAccessible: 0,
   },
+  requests: "",
   status: ReservationStatus.HOLD,
   tab: [],
   tableIds: [],

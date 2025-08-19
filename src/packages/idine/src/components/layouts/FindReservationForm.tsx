@@ -6,7 +6,7 @@ import ProfileInfo from "../organisms/ProfileInfo";
 import ReservationInfo from "../organisms/ReservationInfo";
 import ConfirmationInfo from "../organisms/ConfirmationInfo";
 import useIcon from "../../hooks/render/useIcon";
-import MenuRestrictions from "../molecules/MenuRestrictions";
+import AccommodationInfo from "../organisms/AccommodationInfo";
 
 const FindReservationForm = () => {
   const { register, watch } = useReservationFormContext();
@@ -22,7 +22,9 @@ const FindReservationForm = () => {
     startDate,
     startTimeISO,
     partySize,
+    seatingComposition,
   } = watch();
+
   return (
     <>
       <div className="relative mt-12 flex lg:flex-row flex-col justify-between lg:items-center items-start w-full drop-shadow-sm">
@@ -57,7 +59,7 @@ const FindReservationForm = () => {
             <ReservationInfo />
           </TabItem>
           <TabItem title="" icon={accommodationsIcon}>
-            <MenuRestrictions />
+            <AccommodationInfo />
           </TabItem>
           <TabItem
             disabled={
@@ -67,7 +69,10 @@ const FindReservationForm = () => {
               !email.length ||
               !startDate ||
               !startTimeISO ||
-              !partySize
+              !partySize ||
+              Number(seatingComposition.infants) +
+                Number(seatingComposition.wheelchairAccessible) >
+                Number(partySize)
             }
             title=""
             icon={confirmationIcon}

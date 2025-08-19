@@ -78,6 +78,11 @@ export default interface Reservation {
   status: ReservationStatus;
 
   /**
+   * special requests that a guest might have
+   */
+  requests?: string;
+
+  /**
    * once the customers pay, the tab is collected here
    * item ids are allowed to repeat
    */
