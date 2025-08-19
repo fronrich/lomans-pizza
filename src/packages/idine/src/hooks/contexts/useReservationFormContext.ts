@@ -42,7 +42,7 @@ export default () => {
 
       console.log(cleanedData);
 
-      return;
+      // return;
       // double check reservation at table at time does not exist
       // fetch by table then filter by time
       const reservationsAtTable: Reservation[] = [
