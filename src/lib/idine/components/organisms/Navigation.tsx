@@ -23,10 +23,12 @@ const Navigation = () => {
     >
       <div className="flex">
         <NavbarToggle />
-        <NavbarBrand>
-          <Glyph fill="fill-primary-500" />
-          <span className="font-semibold text-3xl">IDine</span>
-        </NavbarBrand>
+        <Link to="/">
+          <NavbarBrand>
+            <Glyph fill="fill-primary-500" />
+            <span className="font-semibold text-3xl">IDine</span>
+          </NavbarBrand>
+        </Link>
       </div>
       <div className="flex md:order-2">
         <AuthUI />

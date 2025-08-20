@@ -46,6 +46,12 @@ export default () => {
     nav({ to: "/" });
   };
 
+  const banishGuest = useCallback(() => {
+    if (!currentUser) {
+      return banish();
+    }
+  }, [currentUser]);
+
   /**
    * banish non admins from a route,
    * returning them to idine home
@@ -78,6 +84,7 @@ export default () => {
     },
     security: {
       banish,
+      banishGuest,
       banishNonAdmins,
     },
     utils: {
