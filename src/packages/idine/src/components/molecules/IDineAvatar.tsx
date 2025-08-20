@@ -35,13 +35,17 @@ const IDineAvatar = () => {
               </Badge>
             </abbr>
           )}
-          <Button
-            onClick={() => nav({ to: "/dashboard/admin" })}
-            color="alternative"
-          >
-            Manage {restaurant?.name} 🔓
+          {currentUser && restaurant?.adminIds.includes(currentUser?.id) && (
+            <Button
+              onClick={() => nav({ to: "/dashboard/admin" })}
+              color="alternative"
+            >
+              Manage {restaurant?.name} 🔓
+            </Button>
+          )}
+          <Button onClick={() => nav({ to: "/dashboard" })} color="alternative">
+            My Reservations
           </Button>
-          <Button color="alternative">My Reservations</Button>
           <Button onClick={googleSignOut}>Sign Out</Button>
         </Card>
       }
