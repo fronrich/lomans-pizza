@@ -7,11 +7,11 @@ import {
   User,
   onAuthStateChanged,
 } from "firebase/auth";
-import useUsersCollection from "../services/firestore/useUsersCollection";
-import useFirebaseContext from "../contexts/useFirebaseContext";
-import useProfilesContext from "../contexts/useProfileContext";
-import UserRole from "../../enums/UserRole";
-import IDineUser from "../../types/User";
+import useUsersCollection from "../firestore/useUsersCollection";
+import useFirebaseContext from "../../contexts/useFirebaseContext";
+import useProfilesContext from "../../contexts/useProfileContext";
+import UserRole from "../../../enums/UserRole";
+import IDineUser from "../../../types/User";
 import { useEffect, useState } from "react";
 
 export default () => {
@@ -96,9 +96,12 @@ export default () => {
   const googleSignOut = async () => {
     try {
       await signOut(auth);
+      console.log("User successfully signed out!");
+      return;
       // The onAuthStateChanged listener will automatically update your UI after this.
     } catch (error) {
       console.error("Trouble signing out:", error);
+      return;
     }
   };
 

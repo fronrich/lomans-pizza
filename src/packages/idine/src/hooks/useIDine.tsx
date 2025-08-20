@@ -16,12 +16,17 @@ import MenuCategory from "../enums/MenuCategory";
 import AllergenVisual from "../components/molecules/AllergenVisual";
 import DietVisual from "../components/molecules/DietVisual";
 import shouldHighlight from "../utils/shouldHighlight";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import formatDatePretty from "../utils/formatDatePretty";
 import convert24ToAmPm from "../utils/convert24ToAmPm";
 import ReservationConfirmation from "../components/organisms/ReservationConfirmation";
+import ReservationTable from "../components/layouts/ReservationTable";
+import EditReservationForm from "../components/layouts/EditReservationForm";
+import UpdateConfirmation from "../components/organisms/UpdateConfirmation";
+import { useNavigate } from "@tanstack/react-router";
 
 export default () => {
+  const nav = useNavigate();
   const { restaurant, currentUser, reservations } = useProfilesContext();
   const { googleSignIn, googleSignOut } = useAuthContext();
 
@@ -35,6 +40,25 @@ export default () => {
       ),
     ];
   }, [currentUser, reservations]);
+
+  // banish user to home
+  const banish = () => {
+    nav({ to: "/" });
+  };
+
+  /**
+   * banish non admins from a route,
+   * returning them to idine home
+   */
+  const banishNonAdmins = useCallback(() => {
+    if (!currentUser) {
+      return banish();
+    }
+    if (!restaurant?.adminIds.includes(currentUser.id)) {
+      return banish();
+    }
+    return;
+  }, [currentUser, restaurant]);
 
   return {
     restaurant,
@@ -51,6 +75,10 @@ export default () => {
       Allergen,
       Diet,
       MenuCategory,
+    },
+    security: {
+      banish,
+      banishNonAdmins,
     },
     utils: {
       enumToArray,
@@ -73,7 +101,12 @@ export default () => {
       organisms: {
         AuthUI,
         FindReservationForm,
+        EditReservationForm,
         ReservationConfirmation,
+        UpdateConfirmation,
+      },
+      layouts: {
+        ReservationTable,
       },
     },
   };

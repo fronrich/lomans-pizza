@@ -1,5 +1,5 @@
-import TableStatus from "../../enums/TableStatus";
-import Table from "../../types/Table";
+import TableStatus from "../../../enums/TableStatus";
+import Table from "../../../types/Table";
 import useCRUD from "./useCRUD";
 
 export default () => {

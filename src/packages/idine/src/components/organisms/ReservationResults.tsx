@@ -65,10 +65,11 @@ const ReservationResults = () => {
             <div className="flex flex-row w-full gap-4 overflow-x-auto pb-8 pt-1">
               {dayFilter &&
                 [...groupSuggestionsByDate(sameTimeOfDayTimes)[dayFilter]].map(
-                  (time) => (
+                  (slot) => (
                     <ReservationTime
-                      key={time}
-                      time={time}
+                      key={slot.time}
+                      time={slot.time}
+                      tableId={slot.tableId}
                       date={new Date(dayFilter)}
                     />
                   )

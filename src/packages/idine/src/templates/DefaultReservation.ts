@@ -11,6 +11,7 @@ const DefaultReservation: Reservation = {
   partySize: 0,
   phone: "",
   restaurantId: "",
+  restaurantName: "",
   date: new Date(),
   tableServerIndices: [],
   targetTime: "",
@@ -18,7 +19,6 @@ const DefaultReservation: Reservation = {
   startTimeISO: "",
   seatingComposition: {
     infants: 0,
-    regular: 0,
     wheelchairAccessible: 0,
   },
   requests: "",

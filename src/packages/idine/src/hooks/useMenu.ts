@@ -22,7 +22,11 @@ export default () => {
     // filter out menu items that can't be eaten
     const safeMenuItems = oldMenu.filter((item) => {
       for (const allergen of item.allergens) {
-        if (currentReservation?.allergies.includes(allergen)) {
+        if (
+          currentReservation?.allergies
+            .map((allergy) => Number(allergy))
+            .includes(Number(allergen))
+        ) {
           return false;
         }
       }
@@ -30,6 +34,8 @@ export default () => {
     });
 
     const pivot = groupMenuByCategory(safeMenuItems);
+
+    console.log("pivot", pivot, "current reservation", currentReservation);
 
     // return the pivot
     return pivot;

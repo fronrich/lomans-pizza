@@ -39,6 +39,11 @@ export default interface Reservation {
   restaurantId: string;
 
   /**
+   * Name of restaurant;
+   */
+  restaurantName?: string;
+
+  /**
    * Determined by the booking algorithm for parties <= 8.
    * For parties > 8, store owner has option to reject reservation
    * or accept and combine tables. Do note that combining tables may

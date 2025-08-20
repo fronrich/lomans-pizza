@@ -15,5 +15,6 @@ export default interface ProfilesContextMethods {
   menuItems: MenuItem[];
   tables: Table[];
   reservations: Reservation[];
+  setReservations: Dispatch<SetStateAction<Reservation[]>>;
   maxGuests: number;
 }

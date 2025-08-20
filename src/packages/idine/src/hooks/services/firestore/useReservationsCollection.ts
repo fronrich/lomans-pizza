@@ -1,5 +1,5 @@
-import DefaultReservation from "../../templates/DefaultReservation";
-import Reservation from "../../types/Reservation";
+import DefaultReservation from "../../../templates/DefaultReservation";
+import Reservation from "../../../types/Reservation";
 import useCRUD from "./useCRUD";
 
 export default () => {

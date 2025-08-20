@@ -29,6 +29,8 @@ const ReservationInfo: FC = () => {
                 switch (index) {
                   case 0:
                     return "Select Party Size";
+                  case 1:
+                    return "1 Person";
                   case maxGuests + 1:
                     return `${maxGuests + 1}+ People`;
                   default:
@@ -39,10 +41,10 @@ const ReservationInfo: FC = () => {
           ))}
         </Select>
 
-        {partySize > 1 && partySize <= maxGuests && <DynamicCalendar />}
+        {partySize > 0 && partySize <= maxGuests && <DynamicCalendar />}
       </div>
 
-      {partySize > 1 && partySize <= maxGuests && (
+      {partySize > 0 && partySize <= maxGuests && (
         <TimeSelector register={register} />
       )}
       {partySize > maxGuests && (

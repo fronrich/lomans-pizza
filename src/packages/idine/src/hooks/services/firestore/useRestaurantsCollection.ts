@@ -1,6 +1,6 @@
-import DayOfWeek from "../../enums/DayOfWeek";
-import Restaurant from "../../types/Restaurant";
-import Table from "../../types/Table";
+import DayOfWeek from "../../../enums/DayOfWeek";
+import Restaurant from "../../../types/Restaurant";
+import Table from "../../../types/Table";
 import useCRUD from "./useCRUD";
 import useTablesCollection from "./useTablesCollection";
 

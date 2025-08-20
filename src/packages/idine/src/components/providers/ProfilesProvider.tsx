@@ -1,15 +1,15 @@
 import { FC, ReactNode, useEffect, useMemo, useState } from "react";
 import ProfilesContext from "../../contexts/ProfileContext";
-import useRestaurantsCollection from "../../hooks/firestore/useRestaurantsCollection";
-import useTablesCollection from "../../hooks/firestore/useTablesCollection";
-import useMenuItemsCollection from "../../hooks/firestore/useMenuItemsCollection";
+import useRestaurantsCollection from "../../hooks/services/firestore/useRestaurantsCollection";
+import useTablesCollection from "../../hooks/services/firestore/useTablesCollection";
+import useMenuItemsCollection from "../../hooks/services/firestore/useMenuItemsCollection";
 import User from "../../types/User";
 import Restaurant from "../../types/Restaurant";
 import { Unsubscribe } from "firebase/firestore";
 import MenuItem from "../../types/MenuItem";
 import Table from "../../types/Table";
 import Reservation from "../../types/Reservation";
-import useReservationsCollection from "../../hooks/firestore/useReservationsCollection";
+import useReservationsCollection from "../../hooks/services/firestore/useReservationsCollection";
 
 interface ProfilesProviderProps {
   children: ReactNode;
@@ -105,6 +105,7 @@ const ProfilesProvider: FC<ProfilesProviderProps> = ({ children }) => {
       tables,
       menuItems,
       reservations,
+      setReservations,
       maxGuests,
     }),
     [restaurant, currentUser, tables, menuItems, reservations, maxGuests]

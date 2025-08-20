@@ -6,6 +6,7 @@ import RelativeISOTimeString from "../types/RelativeISOTimeString";
 import Reservation from "../types/Reservation";
 import ReservationSuggestion from "../types/ReservationSuggestion";
 import Table from "../types/Table";
+import toDate from "./toDate";
 
 /**
  * Get collections of suggested times based on conditions
@@ -131,7 +132,7 @@ export default ({
   for (const t of usableTables) reservationsByTable[t.id] = [];
   for (const r of currentReservations) {
     if (!r.startTimeISO) continue;
-    const start = toDateWithTime(r.date, r.startTimeISO);
+    const start = toDateWithTime(toDate(r.startDate) as Date, r.startTimeISO);
     const end = addMinutes(start, RESERVATION_MINUTES);
     for (const tid of r.tableIds) {
       if (!reservationsByTable[tid]) continue; // ignore reservations for unavailable tables

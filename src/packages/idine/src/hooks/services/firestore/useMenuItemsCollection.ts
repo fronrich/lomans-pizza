@@ -1,5 +1,5 @@
-import MenuCategory from "../../enums/MenuCategory";
-import MenuItem from "../../types/MenuItem";
+import MenuCategory from "../../../enums/MenuCategory";
+import MenuItem from "../../../types/MenuItem";
 import useCRUD from "./useCRUD";
 
 export default () => {

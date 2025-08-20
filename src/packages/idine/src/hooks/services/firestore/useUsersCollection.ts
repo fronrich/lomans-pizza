@@ -1,5 +1,5 @@
-import UserRole from "../../enums/UserRole";
-import User from "../../types/User";
+import UserRole from "../../../enums/UserRole";
+import User from "../../../types/User";
 import useCRUD from "./useCRUD";
 
 export default () => {

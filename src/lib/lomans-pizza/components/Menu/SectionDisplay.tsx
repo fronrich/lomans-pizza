@@ -4,17 +4,20 @@ import { MenuByCategoryName } from "../../../../packages/idine/src/utils/groupMe
 import MenuItem from "./MenuItem";
 import Diet from "../../../../packages/idine/src/enums/Diet";
 import Allergen from "../../../../packages/idine/src/enums/Allergen";
+import Reservation from "../../../../packages/idine/src/types/Reservation";
 
 interface SectionDisplayProps {
   menu: MenuByCategoryName;
   highlight: Diet[];
   category: MenuCategory;
+  currentReservation: Reservation;
 }
 
 const SectionDisplay: FC<SectionDisplayProps> = ({
   category,
   highlight,
   menu,
+  currentReservation,
 }) => {
   const {
     display: {
@@ -34,12 +37,22 @@ const SectionDisplay: FC<SectionDisplayProps> = ({
         <h2 className="text-4xl sticky !m-0 lg:inline translate-y-2 hidden">
           {MenuCategory[category]}S
         </h2>
-        <div className="lg:gap-8 gap-2 flex flex-wrap content-start lg:justify-center justify-between w-fit p-4 bg-surface-50 rounded-lg shadow-lg border-1 border-surface-300">
+        <div className=" gap-2 flex flex-wrap content-start lg:justify-center justify-between w-fit p-4 bg-surface-50 rounded-lg shadow-lg border-1 border-surface-300">
           {enumToArray(Allergen).map((allergen) => (
-            <AllergenVisual key={allergen} allergen={allergen} displayName />
+            <div
+              key={allergen}
+              className={`px-2 py-1 ${currentReservation && currentReservation.allergies.map((allergen) => Number(allergen)).includes(Number(allergen)) && "bg-red-200 border-[1px] border-red-300 rounded-lg line-through"}`}
+            >
+              <AllergenVisual allergen={allergen} displayName />
+            </div>
           ))}
           {enumToArray(Diet).map((diet) => (
-            <DietVisual key={diet} diet={diet} displayName />
+            <div
+              key={diet}
+              className={`px-2 py-1 ${currentReservation && currentReservation.diets.map((diet) => Number(diet)).includes(Number(diet)) && "bg-emerald-50 border-[1px] border-emerald-300 rounded-lg"}`}
+            >
+              <DietVisual diet={diet} displayName />
+            </div>
           ))}
         </div>
       </div>

@@ -1,9 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+import Dashboard from "$lib/idine/components/pages/Dashboard";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/dashboard/_idine/')({
+export const Route = createFileRoute("/dashboard/_idine/")({
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  return <div>Hello "/dashboard/_idine/"!</div>
+  return <Dashboard />;
 }

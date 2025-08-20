@@ -18,13 +18,18 @@ const Menu = () => {
   return (
     <MenuBg>
       <div className="w-full flex justify-between gap-2 lg:!p-0 p-8 pt-20 pb-0">
-        <CategorySwitch category={category} setCategory={setCategory} />
+        <CategorySwitch
+          allowedCategories={Object.keys(menu)}
+          category={category}
+          setCategory={setCategory}
+        />
         <UseSafeMenuButton
           currentReservation={currentReservation}
           setCurrentReservation={setCurrentReservation}
         />
       </div>
       <SectionDisplay
+        currentReservation={currentReservation}
         menu={menu}
         highlight={currentReservation?.diets ?? []}
         category={category}

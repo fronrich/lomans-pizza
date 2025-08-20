@@ -9,8 +9,11 @@ import AllergenVisual from "../molecules/AllergenVisual";
 import DietVisual from "../molecules/DietVisual";
 import { Icon } from "@iconify/react";
 
-const ConfirmationInfo = () => {
-  const { submitReservation, getValues } = useReservationFormContext();
+/**
+ * use when updating a reservation
+ */
+const ConfirmationUpdateInfo = () => {
+  const { updateReservation, getValues } = useReservationFormContext();
   const { restaurant } = useProfilesContext();
   const {
     firstName,
@@ -93,11 +96,11 @@ const ConfirmationInfo = () => {
           Terms of Service.
         </Link>
       </span>
-      <Button type="submit" onClick={submitReservation}>
-        Confirm My Reservation
+      <Button color={"alternative"} type="submit" onClick={updateReservation}>
+        Update My Reservation
       </Button>
     </section>
   );
 };
 
-export default ConfirmationInfo;
+export default ConfirmationUpdateInfo;

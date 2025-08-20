@@ -16,7 +16,7 @@ import {
   WhereFilterOp,
 } from "firebase/firestore";
 import { v4 } from "uuid";
-import useFirebaseContext from "../contexts/useFirebaseContext";
+import useFirebaseContext from "../../contexts/useFirebaseContext";
 
 interface useCRUDParams {
   collectionName: string;

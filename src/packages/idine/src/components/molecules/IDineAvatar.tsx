@@ -4,8 +4,10 @@ import getInitials from "../../utils/getInitials";
 import useAuthContext from "../../hooks/contexts/useAuthContext";
 import Glyph from "../atoms/Glyph";
 import { Icon } from "@iconify/react";
+import { useNavigate } from "@tanstack/react-router";
 
 const IDineAvatar = () => {
+  const nav = useNavigate();
   const { currentUser, restaurant } = useProfilesContext();
   const { googleSignOut } = useAuthContext();
   return (
@@ -33,14 +35,19 @@ const IDineAvatar = () => {
               </Badge>
             </abbr>
           )}
-          <Button color="alternative">Manage {restaurant?.name}</Button>
+          <Button
+            onClick={() => nav({ to: "/dashboard/admin" })}
+            color="alternative"
+          >
+            Manage {restaurant?.name} 🔓
+          </Button>
           <Button color="alternative">My Reservations</Button>
           <Button onClick={googleSignOut}>Sign Out</Button>
         </Card>
       }
     >
       <Avatar
-        className="cursor-pointer"
+        className="cursor-pointer border-[1px] rounded-full border-surface-300"
         rounded
         placeholderInitials={getInitials(
           `${currentUser?.firstName} ${currentUser?.lastName}`

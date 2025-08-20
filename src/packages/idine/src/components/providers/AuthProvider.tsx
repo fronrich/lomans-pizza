@@ -1,5 +1,5 @@
 import { FC, ReactNode, useMemo } from "react";
-import useAuth from "../../hooks/auth/useAuth";
+import useAuth from "../../hooks/services/auth/useAuth";
 import AuthContext from "../../contexts/AuthContext";
 import AuthContextMethods from "../../types/AuthContextMethods";
 

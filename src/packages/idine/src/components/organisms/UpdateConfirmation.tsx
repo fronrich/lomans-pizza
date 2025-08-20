@@ -5,13 +5,13 @@ import Confetti from "react-confetti";
 import useProfilesContext from "../../hooks/contexts/useProfileContext";
 import { useNavigate } from "@tanstack/react-router";
 
-interface ReservationConfirmationProps {
+interface UpdateConfirmationProps {
   name: string;
   number: string;
   phone: string;
 }
 
-const ReservationConfirmation: FC<ReservationConfirmationProps> = ({
+const UpdateConfirmation: FC<UpdateConfirmationProps> = ({
   name,
   number,
   phone,
@@ -25,24 +25,16 @@ const ReservationConfirmation: FC<ReservationConfirmationProps> = ({
         <div className="w-full max-w-xl p-8 flex flex-col text-left lg:text-center gap-8">
           <div className="flex flex-col">
             <span className="text-xl font-semibold uppercase motion-translate-y-in-100 motion-opacity-in-0 motion-ease-in-out-back motion-delay-200">
-              <span>🎉</span> Congratulations {name}! You're all set.
+              <span>🎉</span> And that's it {name}, you're all set!
             </span>
 
             {restaurant && (
               <span className="motion-translate-y-in-100 motion-opacity-in-0 motion-ease-in-out-back motion-delay-300">
-                See you at {restaurant?.name}!
+                We'll let {restaurant?.name} know you've changed your
+                reservation.
               </span>
             )}
           </div>
-          {restaurant && (
-            <Button
-              color={"alternative"}
-              className="motion-translate-y-in-100 motion-opacity-in-0 motion-ease-in-out-back motion-delay-500"
-              onClick={() => nav({ to: "/restaurants/lomans-pizza" })}
-            >
-              Back to {restaurant?.name}
-            </Button>
-          )}
           {currentUser && (
             <Button
               onClick={() => nav({ to: "/dashboard" })}
@@ -51,10 +43,6 @@ const ReservationConfirmation: FC<ReservationConfirmationProps> = ({
               Manage your reservations with IDine
             </Button>
           )}
-          <span className="italic motion-translate-y-in-100 motion-opacity-in-0 motion-ease-in-out-back motion-delay-2000">
-            When you arrive, please let the hostess know your phone number or
-            confirmation number to get checked in.
-          </span>
           <div className="flex flex-col text-xs motion-translate-y-in-100 motion-opacity-in-0 motion-ease-in-out-back motion-delay-[2200ms]">
             <strong>Confirmation #: {number}</strong>
             <strong>Phone #: {phone}</strong>
@@ -66,4 +54,4 @@ const ReservationConfirmation: FC<ReservationConfirmationProps> = ({
   );
 };
 
-export default ReservationConfirmation;
+export default UpdateConfirmation;

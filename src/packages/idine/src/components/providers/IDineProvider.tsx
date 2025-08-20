@@ -4,6 +4,7 @@ import ProfilesProvider from "./ProfilesProvider";
 
 import AuthProvider from "./AuthProvider";
 import ReservationFormProvider from "./ReservationFormProvider";
+import useEmailService from "../../hooks/services/useEmailService";
 
 interface IDineProviderProps {
   children: ReactNode;
@@ -14,6 +15,10 @@ interface IDineProviderProps {
  * with all it's firebase connections and global state
  */
 const IDineProvider: FC<IDineProviderProps> = ({ children }) => {
+  const { initEmailService } = useEmailService();
+
+  initEmailService();
+
   return (
     <FirebaseProvider>
       <ProfilesProvider>
