@@ -9,7 +9,7 @@ const Landing = () => {
   return (
     <>
       <PageContentWrapper>
-        <h1 className="font-semibold lg:!text-7xl">
+        <h1 className="font-bold text-3xl lg:!text-7xl">
           {currentUser
             ? `Welcome Back, ${currentUser.firstName}!`
             : "Hey There!"}
